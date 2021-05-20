@@ -23,7 +23,7 @@ func main() {
 	}
 
 	postgresURL := os.Getenv("DATABASE_URL")
-	_, err := database.NewDatabase(postgresURL)
+	err := database.NewDatabase(postgresURL)
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -1,5 +1,5 @@
 package bot
 
-func CheckForDiscordMessages() {
+func CheckForTradeSignals() {
 
 }

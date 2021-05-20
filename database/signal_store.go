@@ -27,7 +27,7 @@ func (store *SignalStore) CreateSignal(s bot.Signal) error {
 	if _, err := store.Exec(`INSERT INTO signals (crypto_currency, crypto_pair, amount, increments, current_increment, 
                      				order_profit, order_loss, date_start, profit) 
 								VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-		s.CryptoCurrency, s.CryptoPair, s.Amount, s.Increments, s.CurrentIncrement, s.OrderProfit, s.OrderLoss,
+		s.CryptoBase, s.CryptoQuote, s.Amount, s.Increments, s.CurrentIncrement, s.OrderProfit, s.OrderLoss,
 		s.DateStart, s.Profit); err != nil {
 		return fmt.Errorf("error updating trade signal: %w", err)
 	}
@@ -50,7 +50,7 @@ func (store *SignalStore) UpdateSignal(s bot.Signal) error {
 									profit = $10,
 								    closed = $11
 								WHERE id = $12`,
-		s.CryptoCurrency, s.CryptoPair, s.Amount, s.Increments, s.CurrentIncrement, s.OrderProfit, s.OrderLoss,
+		s.CryptoBase, s.CryptoQuote, s.Amount, s.Increments, s.CurrentIncrement, s.OrderProfit, s.OrderLoss,
 		s.DateStart, s.DateEnd, s.Closed, s.ID); err != nil {
 		return fmt.Errorf("error updating trade signal: %w", err)
 	}

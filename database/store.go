@@ -7,25 +7,29 @@ import (
 	_ "github.com/lib/pq"
 )
 
-func NewDatabase(dsn string) (*Store, error) {
+var DB *Store
+
+func NewDatabase(dsn string) error {
 
 	db, err := sqlx.Open("postgres", dsn)
 	if err != nil {
-		return nil, fmt.Errorf("error opening postgres database: %w", err)
+		return fmt.Errorf("error opening postgres database: %w", err)
 	}
 
 	if err = db.Ping(); err != nil {
-		return nil, fmt.Errorf("error pinging postgres database: %w", err)
+		return fmt.Errorf("error pinging postgres database: %w", err)
 	}
 
 	defer db.Close()
 	db.SetMaxOpenConns(10)
 	db.SetMaxIdleConns(5)
 
-	return &Store{
+	DB = &Store{
 		&SignalStore{DB: db},
 		&MessageStore{DB: db},
-	}, nil
+	}
+
+	return nil
 }
 
 // Store combines all stores.

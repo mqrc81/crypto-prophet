@@ -5,9 +5,9 @@ import (
 )
 
 type Signal struct {
-	ID               int       `db:"id"`
-	CryptoCurrency   string    `db:"crypto_currency"` // MTC
-	CryptoPair       string    `db:"crypto_pair"`     // USDT
+	ID               string    `db:"id"`
+	CryptoBase       string    `db:"crypto_currency"` // MTC
+	CryptoQuote      string    `db:"crypto_pair"`     // USDT
 	Amount           float64   `db:"amount"`
 	Increments       []float64 `db:"increments"`
 	CurrentIncrement int       `db:"current_increment"` // Stop - Initial - T1 - T2 - T3 - T4 - T5 - T6
