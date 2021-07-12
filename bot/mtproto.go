@@ -9,7 +9,8 @@ import (
 )
 
 const (
-	resourcesFilePath = "./resources"
+	resourcesFilePath           = "./resources"
+	CrazyRussianTraderChannelID = 1234
 )
 
 func AuthorizeTelegram() (*telegram.Client, error) {
@@ -18,12 +19,16 @@ func AuthorizeTelegram() (*telegram.Client, error) {
 
 	appID, _ := strconv.Atoi(os.Getenv("TELEGRAM_ID"))
 
-	return telegram.NewClient(telegram.ClientConfig{
-		SessionFile:     sessionFile,                 // where to store session configuration
-		ServerHost:      os.Getenv("MTPROTO_SERVER"), // host address of mtproto proxy server
+	return telegram.NewClient(telegram.ClientConfig{ // where to store session configuration
+		SessionFile:     sessionFile,
+		ServerHost:      os.Getenv("MTPROTO_SERVER"), // host address of mtproto server
 		PublicKeysFile:  publicKeysFile,              // can be found at https://my.telegram.org
 		AppID:           appID,                       // can be found at https://my.telegram.org
 		AppHash:         os.Getenv("TELEGRAM_HASH"),  // can be found at https://my.telegram.org
 		InitWarnChannel: true,                        // if errors should be received, otherwise client.Warnings will be set nil
 	})
+}
+
+func getNewMessages(client *telegram.Client) {
+
 }

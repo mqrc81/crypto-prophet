@@ -18,7 +18,8 @@ func main() {
 		}
 	}
 
-	client, err := bot.AuthorizeTelegram()
-	fmt.Println("CLIENT:\n", client, "\n\nERROR:\n", err)
+	tgClient, err := bot.AuthorizeTelegram()
+
+	fmt.Println("CLIENT:\n", tgClient, "\n\nERROR:\n", err)
 
 }
