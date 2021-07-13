@@ -10,7 +10,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Aight let's start over...")
 
 	if os.Getenv("ENV") != "server" {
 		if err := godotenv.Load(); err != nil {
@@ -19,7 +18,14 @@ func main() {
 	}
 
 	tgClient, err := bot.AuthorizeTelegram()
+	if err != nil {
+		panic(err.Error()) // TODO handle err
+	}
 
-	fmt.Println("CLIENT:\n", tgClient, "\n\nERROR:\n", err)
+	registred, err := tgClient.IsSessionRegistred()
+	if err != nil {
+		panic(err.Error()) // TODO handle err
+	}
+	fmt.Println("Registered: ", registred)
 
 }
